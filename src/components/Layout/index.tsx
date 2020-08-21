@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 
 import LeftColumn from '../LeftColumn'
 import MiddleColumn from '../MiddleColumn';
@@ -9,6 +9,14 @@ import AdBanner from '../AdBanner';
 import { Container } from './styles';
 
 const Layout: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+  
   return (
     <Container>
         <MobileHeader />
@@ -19,9 +27,9 @@ const Layout: React.FC = () => {
         </span>
         
         <main>
-            <LeftColumn />
-            <MiddleColumn />
-            <RightColumn />
+            <LeftColumn isLoading={isLoading}/>
+            <MiddleColumn isLoading={isLoading}/>
+            <RightColumn isLoading={isLoading}/>
         </main>
     </Container>
   );
